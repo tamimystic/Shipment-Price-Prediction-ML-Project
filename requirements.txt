@@ -14,5 +14,6 @@ xgboost
 dill
 evidently
 catboost
+python-dotenv
 
 -e .
