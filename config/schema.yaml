@@ -1,1 +1,6 @@
-Name: Tamim Hossain
+drop_columns:
+  - Customer Id
+  - Artist Name
+  - Customer Location
+  - Scheduled Date
+  - Delivery Date
