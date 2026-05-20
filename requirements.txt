@@ -7,14 +7,14 @@ matplotlib
 PyYAML
 scikit-learn
 seaborn
-pandas
+pandas<2.0
 pymongo
 pymongo[srv]
 xgboost
 dill
-evidently
+evidently==0.2.8
 catboost
 python-dotenv
-numpy
+numpy<2.0
 
 -e .
