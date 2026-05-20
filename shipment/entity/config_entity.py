@@ -14,14 +14,20 @@ class DataIngestionConfig:
 
 
 
-        self.DATA_INGESTION_ARTIFACTS_DIR: str =os.path.join(os.getcwd(),ARTIFACTS_DIR, DATA_INGESTION_ARTIFACTS_DIR)
+        self.DATA_INGESTION_ARTIFACTS_DIR: str =os.path.join(
+            ARTIFACTS_DIR, DATA_INGESTION_ARTIFACTS_DIR)
 
 
-        self.TRAIN_DATA_ARTIFACTS_DIR: str = os.path.join(self.DATA_INGESTION_ARTIFACTS_DIR,DATA_INGESTION_TRAIN_DIR)
+        self.TRAIN_DATA_ARTIFACTS_DIR: str = os.path.join(
+            self.DATA_INGESTION_ARTIFACTS_DIR,DATA_INGESTION_TRAIN_DIR)
 
-        self.TEST_DATA_ARTIFACT_FILE_DIR: str = os.path.join(self.DATA_INGESTION_ARTIFCATS_DIR, DATA_INGESTION_TEST_DIR)
+        self.TEST_DATA_ARTIFACTS_FILE_DIR: str = os.path.join(
+            self.DATA_INGESTION_ARTIFACTS_DIR, DATA_INGESTION_TEST_DIR)
 
 
-        self.TRAIN_DATA_FILE_PATH: str = os.path.join(self.TRAIN_DATA_ARTIFACT_FILE_DIR, DATA_INGESTION_TRAIN_FILE_NAME)
+        self.TRAIN_DATA_FILE_PATH: str = os.path.join(
+            self.TRAIN_DATA_ARTIFACTS_DIR, DATA_INGESTION_TRAIN_FILE_NAME)
 
-        self.TEST_DATA_FILE_PATH: str = os.path.join(self.TEST_DATA_ARTIFACT_FILE_DIR, DATA_INGESTION_TEST_FILE_NAME)
+        self.TEST_DATA_FILE_PATH: str = os.path.join(
+            self.TEST_DATA_ARTIFACTS_FILE_DIR, DATA_INGESTION_TEST_FILE_NAME)
+        

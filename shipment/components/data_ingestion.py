@@ -58,7 +58,7 @@ class DataIngestion:
         try:
             # Creating Data Ingestion Artifacts directory inside Artifcat folder
             os.makedirs(
-                self.data_ingestion_config.DATA_INGESTION_ARTIFCATS_DIR, exist_ok=True
+                self.data_ingestion_config.DATA_INGESTION_ARTIFACTS_DIR, exist_ok=True
             )
 
             # Splitting the data into train and test
@@ -67,18 +67,18 @@ class DataIngestion:
 
             # Creating train directory under data ingestion artifact directory
             os.makedirs(
-                self.data_ingestion_config.TRAIN_DATA_ARTIFACT_FILE_DIR, exist_ok=True
+                self.data_ingestion_config.TRAIN_DATA_ARTIFACTS_DIR, exist_ok=True
             )
             logging.info(
-                f"Created {os.path.basename(self.data_ingestion_config.TRAIN_DATA_ARTIFACT_FILE_DIR)} directory."
+                f"Created {os.path.basename(self.data_ingestion_config.TRAIN_DATA_ARTIFACTS_DIR)} directory."
             )
 
             # Creating test directory under data ingestion artifact directory
             os.makedirs(
-                self.data_ingestion_config.TEST_DATA_ARTIFACT_FILE_DIR, exist_ok=True
+                self.data_ingestion_config.TEST_DATA_ARTIFACTS_FILE_DIR, exist_ok=True
             )
             logging.info(
-                f"Created {os.path.basename(self.data_ingestion_config.TEST_DATA_ARTIFACT_FILE_DIR)} directory."
+                f"Created {os.path.basename(self.data_ingestion_config.TEST_DATA_ARTIFACTS_FILE_DIR)} directory."
             )
 
             # Saving train.csv file to train directory
@@ -98,8 +98,8 @@ class DataIngestion:
             logging.info("Converted Train Dataframe and Test Dataframe into csv")
             logging.info(
                 f"Saved {os.path.basename(self.data_ingestion_config.TRAIN_DATA_FILE_PATH)},\
-                 {os.path.basename(self.data_ingestion_config.TEST_DATA_FILE_PATH)} in\
-                     {os.path.basename(self.data_ingestion_config.DATA_INGESTION_ARTIFCATS_DIR)}."
+                {os.path.basename(self.data_ingestion_config.TEST_DATA_FILE_PATH)} in\
+                    {os.path.basename(self.data_ingestion_config.DATA_INGESTION_ARTIFACTS_DIR)}."
             )
             logging.info(
                 "Exited split_data_as_train_test method of Data_Ingestion class"
@@ -107,6 +107,7 @@ class DataIngestion:
             return train_set, test_set
 
         except Exception as e:
+            logging.info(e)
             raise CustomException(e)
         
     # This method initiates data ingestion
@@ -142,6 +143,7 @@ class DataIngestion:
             return data_ingestion_artifacts
 
         except Exception as e:
+            logging.info(e)
             raise CustomException(e)
         
 
