@@ -2,6 +2,7 @@ import numpy as np
 import yaml
 from shipment.exception import CustomException
 from shipment.logger import logging
+import dill
 
 
 
@@ -52,4 +53,19 @@ class MainUtils:
 
         except Exception as e:
             logging.info(CustomException(e))
+            raise CustomException(e)
+        
+    @staticmethod
+    def save_object(file_path: str, obj: object) -> None:
+        logging.info("Entered the save_object method of MainUtils class")
+        try:
+            with open(file_path, "wb") as file_obj:
+                dill.dump(obj, file_obj)
+
+            logging.info("Exited the save_object method of MainUtils class")
+
+            return file_path
+
+        except Exception as e:
+            logging.exception(e)
             raise CustomException(e)
