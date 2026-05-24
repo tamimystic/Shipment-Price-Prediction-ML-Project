@@ -86,3 +86,23 @@ class DataTransformationConfig:
             DATA_TRANSFORMATION_ARTIFACTS_DIR,
             PREPROCESSOR_OBJECT_FILE_NAME,
         )
+
+
+
+# Model Training Config Entity
+@dataclass
+class ModelTrainerConfig:
+    def __init__(self):
+        self.UTILS = MainUtils()
+        self.DATA_TRANSFORMATION_ARTIFACTS_DIR: str = os.path.join(
+            ARTIFACTS_DIR, DATA_TRANSFORMATION_ARTIFACTS_DIR
+        )
+        self.MODEL_TRAINER_ARTIFACTS_DIR: str = os.path.join(
+            ARTIFACTS_DIR, MODEL_TRAINER_ARTIFACTS_DIR
+        )
+        self.PREPROCESSOR_OBJECT_FILE_PATH: str = os.path.join(
+            self.DATA_TRANSFORMATION_ARTIFACTS_DIR, PREPROCESSOR_OBJECT_FILE_NAME
+        )
+        self.TRAINED_MODEL_FILE_PATH: str = os.path.join(
+            ARTIFACTS_DIR, MODEL_TRAINER_ARTIFACTS_DIR, MODEL_FILE_NAME
+        )
