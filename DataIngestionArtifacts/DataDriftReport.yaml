@@ -1,0 +1,587 @@
+data_drift:
+  data:
+    cat_feature_names:
+    - Customer Information
+    - Express Shipment
+    - Fragile
+    - Installation Included
+    - International
+    - Material
+    - Remote Location
+    - Transport
+    datetime_feature_names: []
+    metrics:
+      Artist Reputation:
+        current_small_hist:
+          x:
+          - 0.0
+          - 0.099
+          - 0.198
+          - 0.29700000000000004
+          - 0.396
+          - 0.495
+          - 0.5940000000000001
+          - 0.6930000000000001
+          - 0.792
+          - 0.891
+          - 0.99
+          y:
+          - 0.87051795818512
+          - 1.2307322857099974
+          - 1.1857054947693875
+          - 1.2007144250829247
+          - 1.0806429825746322
+          - 1.0206072613204848
+          - 1.050625121947559
+          - 1.020607261320486
+          - 0.7804643763039011
+          - 0.6603929337956086
+        drift_detected: false
+        drift_score: 0.03240961952380644
+        feature_type: num
+        ref_small_hist:
+          x:
+          - 0.0
+          - 0.1
+          - 0.2
+          - 0.30000000000000004
+          - 0.4
+          - 0.5
+          - 0.6000000000000001
+          - 0.7000000000000001
+          - 0.8
+          - 0.9
+          - 1.0
+          y:
+          - 0.8590554109334325
+          - 1.1230940870211974
+          - 1.3164745258460389
+          - 1.1379695053923393
+          - 1.1714391967274083
+          - 1.2383785793975444
+          - 1.0078095946448495
+          - 0.8218668650055785
+          - 0.7214577910003721
+          - 0.6024544440312386
+        stattest_name: Wasserstein distance (normed)
+      Base Shipping Price:
+        current_small_hist:
+          x:
+          - 10.0
+          - 18.956
+          - 27.912
+          - 36.867999999999995
+          - 45.824
+          - 54.78
+          - 63.736
+          - 72.692
+          - 81.648
+          - 90.604
+          - 99.56
+          y:
+          - 0.036500056077358886
+          - 0.029863682245111815
+          - 0.006636373832247073
+          - 0.0058068271032161835
+          - 0.006470464486440891
+          - 0.004977280374185305
+          - 0.004977280374185305
+          - 0.006636373832247067
+          - 0.005143189719991477
+          - 0.004645461682572947
+        drift_detected: false
+        drift_score: 0.06582908098986416
+        feature_type: num
+        ref_small_hist:
+          x:
+          - 10.01
+          - 19.003999999999998
+          - 27.997999999999998
+          - 36.992
+          - 45.986
+          - 54.98
+          - 63.974
+          - 72.968
+          - 81.962
+          - 90.956
+          - 99.95
+          y:
+          - 0.03750279203531664
+          - 0.027124400854650177
+          - 0.005209869676350492
+          - 0.005706047740764824
+          - 0.00595413677297199
+          - 0.006119529461110102
+          - 0.005499306880592181
+          - 0.006119529461110102
+          - 0.005788744084833879
+          - 0.006160877633144628
+        stattest_name: Wasserstein distance (normed)
+      Cost:
+        current_small_hist:
+          x:
+          - -95657.56
+          - 33574.37300000001
+          - 162806.306
+          - 292038.239
+          - 421270.172
+          - 550502.105
+          - 679734.038
+          - 808965.9710000001
+          - 938197.9040000001
+          - 1067429.837
+          - 1196661.77
+          y:
+          - 7.393091280069272e-06
+          - 2.414539920395874e-07
+          - 5.7489045723711294e-08
+          - 0.0
+          - 1.1497809144742262e-08
+          - 1.1497809144742262e-08
+          - 0.0
+          - 1.1497809144742262e-08
+          - 0.0
+          - 1.1497809144742262e-08
+        drift_detected: false
+        drift_score: 0.045978305502087785
+        feature_type: num
+        ref_small_hist:
+          x:
+          - -252965.99
+          - 174403.799
+          - 601773.588
+          - 1029143.3770000001
+          - 1456513.166
+          - 1883882.9549999998
+          - 2311252.744
+          - 2738622.533
+          - 3165992.3219999997
+          - 3593362.1109999996
+          - 4020731.9
+          y:
+          - 2.305957258687129e-06
+          - 2.0013968660303385e-08
+          - 6.0912078531358126e-09
+          - 1.7403451008959472e-09
+          - 8.701725504479736e-10
+          - 1.7403451008959462e-09
+          - 8.701725504479736e-10
+          - 0.0
+          - 8.701725504479736e-10
+          - 1.7403451008959452e-09
+        stattest_name: Wasserstein distance (normed)
+      Customer Information:
+        current_small_hist:
+          x:
+          - Wealthy
+          - Working Class
+          y:
+          - 167
+          - 506
+        drift_detected: false
+        drift_score: 0.019700783005751763
+        feature_type: cat
+        ref_small_hist:
+          x:
+          - Wealthy
+          - Working Class
+          y:
+          - 733
+          - 1956
+        stattest_name: Jensen-Shannon distance
+      Express Shipment:
+        current_small_hist:
+          x:
+          - 'No'
+          - 'Yes'
+          y:
+          - 471
+          - 202
+        drift_detected: false
+        drift_score: 0.02457379492422337
+        feature_type: cat
+        ref_small_hist:
+          x:
+          - 'No'
+          - 'Yes'
+          y:
+          - 1795
+          - 894
+        stattest_name: Jensen-Shannon distance
+      Fragile:
+        current_small_hist:
+          x:
+          - 'No'
+          - 'Yes'
+          y:
+          - 552
+          - 121
+        drift_detected: false
+        drift_score: 0.023776465899984958
+        feature_type: cat
+        ref_small_hist:
+          x:
+          - 'No'
+          - 'Yes'
+          y:
+          - 2273
+          - 416
+        stattest_name: Jensen-Shannon distance
+      Height:
+        current_small_hist:
+          x:
+          - 3.0
+          - 8.4
+          - 13.8
+          - 19.200000000000003
+          - 24.6
+          - 30.0
+          - 35.400000000000006
+          - 40.800000000000004
+          - 46.2
+          - 51.6
+          - 57.0
+          y:
+          - 0.02448957129492048
+          - 0.02448957129492048
+          - 0.03907324858290682
+          - 0.029442518298387548
+          - 0.023664080127675974
+          - 0.02063727918111274
+          - 0.012657531231082498
+          - 0.007154256782785759
+          - 0.002476473501733532
+          - 0.0011006548896593477
+        drift_detected: false
+        drift_score: 0.05479437983270659
+        feature_type: num
+        ref_small_hist:
+          x:
+          - 3.0
+          - 10.0
+          - 17.0
+          - 24.0
+          - 31.0
+          - 38.0
+          - 45.0
+          - 52.0
+          - 59.0
+          - 66.0
+          - 73.0
+          y:
+          - 0.023694416405461403
+          - 0.030600860649205763
+          - 0.02932582478882219
+          - 0.0261913616320459
+          - 0.017850502045370024
+          - 0.008553365563406471
+          - 0.00430324602879456
+          - 0.0019125537905753602
+          - 0.00026563247091324446
+          - 0.00015937948254794666
+        stattest_name: Wasserstein distance (normed)
+      Installation Included:
+        current_small_hist:
+          x:
+          - 'No'
+          - 'Yes'
+          y:
+          - 399
+          - 274
+        drift_detected: false
+        drift_score: 0.0018149730073468355
+        feature_type: cat
+        ref_small_hist:
+          x:
+          - 'No'
+          - 'Yes'
+          y:
+          - 1601
+          - 1088
+        stattest_name: Jensen-Shannon distance
+      International:
+        current_small_hist:
+          x:
+          - 'No'
+          - 'Yes'
+          y:
+          - 438
+          - 235
+        drift_detected: false
+        drift_score: 0.009683173680869038
+        feature_type: cat
+        ref_small_hist:
+          x:
+          - 'No'
+          - 'Yes'
+          y:
+          - 1785
+          - 904
+        stattest_name: Jensen-Shannon distance
+      Material:
+        current_small_hist:
+          x:
+          - Aluminium
+          - Brass
+          - Bronze
+          - Clay
+          - Marble
+          - Stone
+          - Wood
+          y:
+          - 100
+          - 86
+          - 86
+          - 111
+          - 97
+          - 100
+          - 93
+        drift_detected: false
+        drift_score: 0.03889916661296695
+        feature_type: cat
+        ref_small_hist:
+          x:
+          - Aluminium
+          - Brass
+          - Bronze
+          - Clay
+          - Marble
+          - Stone
+          - Wood
+          y:
+          - 421
+          - 404
+          - 371
+          - 370
+          - 397
+          - 352
+          - 374
+        stattest_name: Jensen-Shannon distance
+      Price Of Sculpture:
+        current_small_hist:
+          x:
+          - 3.0
+          - 13590.504
+          - 27178.008
+          - 40765.512
+          - 54353.016
+          - 67940.52
+          - 81528.024
+          - 95115.528
+          - 108703.032
+          - 122290.53600000001
+          - 135878.04
+          y:
+          - 7.206604116439916e-05
+          - 7.654966436279122e-07
+          - 4.374266535016641e-07
+          - 1.0935666337541603e-07
+          - 0.0
+          - 0.0
+          - 1.0935666337541603e-07
+          - 0.0
+          - 0.0
+          - 1.0935666337541603e-07
+        drift_detected: false
+        drift_score: 0.030117047571649413
+        feature_type: num
+        ref_small_hist:
+          x:
+          - 3.0
+          - 38241.267
+          - 76479.534
+          - 114717.801
+          - 152956.068
+          - 191194.335
+          - 229432.602
+          - 267670.869
+          - 305909.136
+          - 344147.403
+          - 382385.67
+          y:
+          - 2.5957303211843497e-05
+          - 1.264312258351313e-07
+          - 4.862739455197356e-08
+          - 0.0
+          - 9.725478910394717e-09
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 9.725478910394717e-09
+        stattest_name: Wasserstein distance (normed)
+      Remote Location:
+        current_small_hist:
+          x:
+          - 'No'
+          - 'Yes'
+          y:
+          - 520
+          - 153
+        drift_detected: false
+        drift_score: 0.033480802673956006
+        feature_type: cat
+        ref_small_hist:
+          x:
+          - 'No'
+          - 'Yes'
+          y:
+          - 2181
+          - 508
+        stattest_name: Jensen-Shannon distance
+      Transport:
+        current_small_hist:
+          x:
+          - Airways
+          - Roadways
+          - Waterways
+          y:
+          - 246
+          - 264
+          - 163
+        drift_detected: false
+        drift_score: 0.013512755116561677
+        feature_type: cat
+        ref_small_hist:
+          x:
+          - Airways
+          - Roadways
+          - Waterways
+          y:
+          - 945
+          - 1104
+          - 640
+        stattest_name: Jensen-Shannon distance
+      Weight:
+        current_small_hist:
+          x:
+          - 4.0
+          - 5311851.4
+          - 10623698.8
+          - 15935546.200000001
+          - 21247393.6
+          - 26559241.0
+          - 31871088.400000002
+          - 37182935.800000004
+          - 42494783.2
+          - 47806630.6
+          - 53118478.0
+          y:
+          - 1.846219277094591e-07
+          - 1.3986509674959025e-09
+          - 1.118920773996722e-09
+          - 5.59460386998361e-10
+          - 0.0
+          - 2.7973019349918037e-10
+          - 0.0
+          - 0.0
+          - 0.0
+          - 2.7973019349918057e-10
+        drift_detected: false
+        drift_score: 0.04205768938205494
+        feature_type: num
+        ref_small_hist:
+          x:
+          - 5.0
+          - 11792791.4
+          - 23585577.8
+          - 35378364.2
+          - 47171150.6
+          - 58963937.0
+          - 70756723.4
+          - 82549509.8
+          - 94342296.2
+          - 106135082.60000001
+          - 117927869.0
+          y:
+          - 8.435611142504035e-08
+          - 3.1534994925248726e-10
+          - 3.1534994925248717e-11
+          - 3.153499492524873e-11
+          - 3.153499492524873e-11
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 3.153499492524875e-11
+        stattest_name: Wasserstein distance (normed)
+      Width:
+        current_small_hist:
+          x:
+          - 2.0
+          - 5.5
+          - 9.0
+          - 12.5
+          - 16.0
+          - 19.5
+          - 23.0
+          - 26.5
+          - 30.0
+          - 33.5
+          - 37.0
+          y:
+          - 0.05009552112078115
+          - 0.10783273190405433
+          - 0.05985990235618764
+          - 0.028868605391636593
+          - 0.02207599235831034
+          - 0.008490766291657821
+          - 0.005943536404160475
+          - 0.0012736149437486733
+          - 0.0008490766291657821
+          - 0.00042453831458289106
+        drift_detected: false
+        drift_score: 0.04391106652525978
+        feature_type: num
+        ref_small_hist:
+          x:
+          - 2.0
+          - 6.3
+          - 10.6
+          - 14.899999999999999
+          - 19.2
+          - 23.5
+          - 27.799999999999997
+          - 32.099999999999994
+          - 36.4
+          - 40.699999999999996
+          - 45.0
+          y:
+          - 0.07455006183676822
+          - 0.0830255909086978
+          - 0.03615072604149551
+          - 0.024388767329429975
+          - 0.008389044081399672
+          - 0.003459399621195744
+          - 0.0015567298295380847
+          - 0.0006918799242391476
+          - 0.0001729699810597872
+          - 0.0001729699810597869
+        stattest_name: Wasserstein distance (normed)
+      dataset_drift: false
+      n_drifted_features: 0
+      n_features: 15
+      share_drifted_features: 0.0
+    num_feature_names:
+    - Artist Reputation
+    - Base Shipping Price
+    - Cost
+    - Height
+    - Price Of Sculpture
+    - Weight
+    - Width
+    options:
+      confidence: null
+      drift_share: 0.5
+      nbinsx: 10
+      xbins: null
+    target_names: null
+    text_feature_names: []
+    utility_columns:
+      date: null
+      id: null
+      prediction: null
+      target: null
+  datetime: '2026-05-21 03:20:00.185966'
+  name: data_drift
+timestamp: '2026-05-21 03:20:00.185966'
