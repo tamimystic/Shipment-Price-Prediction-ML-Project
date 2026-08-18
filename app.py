@@ -6,17 +6,13 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import plotly.graph_objects as go
-import plotly.express as px
 
-# --- Page Configuration ---
 st.set_page_config(
-    page_title="LogisPredict - Smart Freight & Shipment Price Predictor",
-    page_icon="📦",
+    page_title="LogisPredict - Freight & Shipment Price Estimator",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# --- Custom Dark Theme CSS ---
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -37,99 +33,95 @@ st.markdown("""
         max-width: 1400px !important;
     }
     
-    /* Top Navbar */
     .nav-bar {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 12px 24px;
+        padding: 14px 24px;
         background: #161b22;
         border: 1px solid #30363d;
-        border-radius: 12px;
+        border-radius: 10px;
         margin-bottom: 24px;
     }
     
     .nav-brand {
         display: flex;
         align-items: center;
-        gap: 12px;
-        font-size: 22px;
+        gap: 10px;
+        font-size: 20px;
         font-weight: 700;
         color: #58a6ff;
         letter-spacing: -0.5px;
     }
     
     .nav-badge {
-        background: rgba(56, 139, 253, 0.15);
+        background: rgba(56, 139, 253, 0.12);
         color: #58a6ff;
-        padding: 4px 10px;
-        border-radius: 20px;
-        font-size: 12px;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-size: 11px;
         font-weight: 600;
-        border: 1px solid rgba(56, 139, 253, 0.3);
+        border: 1px solid rgba(56, 139, 253, 0.25);
     }
     
     .status-badge {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        font-size: 13px;
+        font-size: 12px;
         color: #3fb950;
         background: rgba(63, 185, 80, 0.1);
-        padding: 4px 12px;
+        padding: 4px 10px;
         border-radius: 20px;
         border: 1px solid rgba(63, 185, 80, 0.25);
     }
     
     .pulse-dot {
-        width: 8px;
-        height: 8px;
+        width: 7px;
+        height: 7px;
         background: #3fb950;
         border-radius: 50%;
     }
 
-    /* Cards */
     .card-panel {
         background: #161b22;
         border: 1px solid #30363d;
-        border-radius: 12px;
+        border-radius: 10px;
         padding: 20px;
         margin-bottom: 20px;
     }
     
     .card-title {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.8px;
+        letter-spacing: 0.6px;
         color: #8b949e;
         margin-bottom: 16px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
     }
     
-    /* Metrics */
     .metric-card {
         background: #161b22;
         border: 1px solid #30363d;
-        border-radius: 12px;
-        padding: 18px 22px;
+        border-radius: 10px;
+        padding: 18px 20px;
         height: 100%;
     }
     
     .metric-title {
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 600;
         color: #8b949e;
         margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
     
     .metric-value {
-        font-size: 34px;
+        font-size: 32px;
         font-weight: 800;
         color: #ffffff;
-        letter-spacing: -1px;
+        letter-spacing: -0.5px;
     }
     
     .metric-sub {
@@ -139,7 +131,6 @@ st.markdown("""
         font-weight: 500;
     }
     
-    /* Input Styling */
     label, p, span {
         color: #c9d1d9 !important;
         font-size: 13px !important;
@@ -151,7 +142,7 @@ st.markdown("""
         background-color: #0d1117 !important;
         color: #f0f6fc !important;
         border: 1px solid #30363d !important;
-        border-radius: 8px !important;
+        border-radius: 6px !important;
     }
     
     div[data-baseweb="select"] > div:hover,
@@ -159,34 +150,12 @@ st.markdown("""
         border-color: #58a6ff !important;
     }
     
-    /* Streamlit Buttons */
-    .stButton > button {
-        background: linear-gradient(135deg, #1f6feb 0%, #238636 100%) !important;
-        color: #ffffff !important;
-        border: none !important;
-        border-radius: 8px !important;
-        padding: 12px 24px !important;
-        font-size: 15px !important;
-        font-weight: 700 !important;
-        width: 100% !important;
-        letter-spacing: 0.5px !important;
-        transition: all 0.2s ease !important;
-        box-shadow: 0 4px 14px rgba(31, 111, 235, 0.3) !important;
-    }
-    
-    .stButton > button:hover {
-        opacity: 0.95 !important;
-        transform: translateY(-1px) !important;
-        box-shadow: 0 6px 20px rgba(31, 111, 235, 0.45) !important;
-    }
-    
-    /* Timeline styles */
     .timeline-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
         position: relative;
-        padding: 10px 0;
+        padding: 12px 0;
     }
     
     .timeline-step {
@@ -198,15 +167,17 @@ st.markdown("""
     }
     
     .step-icon {
-        width: 36px;
-        height: 36px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
         background: #21262d;
         border: 2px solid #58a6ff;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 16px;
+        font-size: 11px;
+        font-weight: 700;
+        color: #58a6ff;
         margin-bottom: 6px;
     }
     
@@ -223,9 +194,9 @@ st.markdown("""
     
     .timeline-line {
         position: absolute;
-        top: 28px;
-        left: 10%;
-        right: 10%;
+        top: 26px;
+        left: 12%;
+        right: 12%;
         height: 2px;
         background: #30363d;
         z-index: 1;
@@ -233,25 +204,22 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- Top Navigation Bar ---
 st.markdown("""
 <div class="nav-bar">
     <div class="nav-brand">
-        <span>📦</span>
         <span>LogisPredict</span>
-        <span class="nav-badge">ML Freight Intelligence</span>
+        <span class="nav-badge">Freight Engine</span>
     </div>
     <div style="display: flex; gap: 16px; align-items: center;">
         <div class="status-badge">
             <span class="pulse-dot"></span>
-            <span>Live Inference Engine</span>
+            <span>Real-time Estimator</span>
         </div>
-        <div style="font-size: 13px; color: #8b949e;">Model: <strong>XGBoost Regressor</strong></div>
+        <div style="font-size: 13px; color: #8b949e;">Pipeline: <strong>Trained Regressor</strong></div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# --- Supported Shipping Hubs (Coordinates & Distances) ---
 HUBS = {
     "Shanghai, CN (PVG)": {"lat": 31.1443, "lon": 121.8083, "code": "PVG", "country": "China"},
     "Los Angeles, USA (LAX)": {"lat": 33.9416, "lon": -118.4085, "code": "LAX", "country": "USA"},
@@ -265,14 +233,13 @@ HUBS = {
 }
 
 def calculate_distance(lat1, lon1, lat2, lon2):
-    R = 6371  # Earth radius in km
+    R = 6371
     dlat = math.radians(lat2 - lat1)
     dlon = math.radians(lon2 - lon1)
     a = math.sin(dlat / 2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlon / 2)**2
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     return R * c
 
-# --- Load ML Model ---
 @st.cache_resource
 def load_trained_model():
     model_paths = [
@@ -290,15 +257,11 @@ def load_trained_model():
 
 trained_model = load_trained_model()
 
-# --- Main 2-Column Dashboard Layout ---
 col_left, col_right = st.columns([1, 1.25], gap="large")
 
-# ==========================================
-# LEFT PANEL: INPUT PARAMETERS
-# ==========================================
 with col_left:
     st.markdown('<div class="card-panel">', unsafe_allow_html=True)
-    st.markdown('<div class="card-title">⚙️ 1. Route & Origin Details</div>', unsafe_allow_html=True)
+    st.markdown('<div class="card-title">Route & Origin Details</div>', unsafe_allow_html=True)
     
     r_col1, r_col2 = st.columns(2)
     with r_col1:
@@ -311,9 +274,8 @@ with col_left:
     
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Cargo Dimensions & Weight
     st.markdown('<div class="card-panel">', unsafe_allow_html=True)
-    st.markdown('<div class="card-title">📦 2. Cargo Specifications</div>', unsafe_allow_html=True)
+    st.markdown('<div class="card-title">Cargo Specifications</div>', unsafe_allow_html=True)
     
     weight = st.slider("Cargo Weight (kg)", min_value=1.0, max_value=2000.0, value=450.0, step=5.0)
     
@@ -326,19 +288,18 @@ with col_left:
         length = st.number_input("Length (cm)", min_value=1.0, max_value=500.0, value=95.0, step=1.0)
         
     volume_m3 = (height * width * length) / 1_000_000
-    st.caption(f"Calculated Cargo Volume: **{volume_m3:.3f} m³** | Volumetric Weight: **{(volume_m3 * 167):.1f} kg**")
+    st.caption(f"Cargo Volume: **{volume_m3:.3f} m³** | Volumetric Weight: **{(volume_m3 * 167):.1f} kg**")
     
     m_col1, m_col2 = st.columns(2)
     with m_col1:
         material = st.selectbox("Material / Cargo Type", ["Brass", "Aluminium", "Clay", "Wood", "Marble", "Bronze", "Stone"], index=1)
     with m_col2:
-        cargo_value = st.number_input("Declared Cargo Value ($ USD)", min_value=10.0, max_value=100000.0, value=1200.0, step=50.0)
+        cargo_value = st.number_input("Declared Value ($ USD)", min_value=10.0, max_value=100000.0, value=1200.0, step=50.0)
         
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Logistics Mode & Delivery Options
     st.markdown('<div class="card-panel">', unsafe_allow_html=True)
-    st.markdown('<div class="card-title">🚀 3. Transport & Urgency Mode</div>', unsafe_allow_html=True)
+    st.markdown('<div class="card-title">Transport & Delivery Options</div>', unsafe_allow_html=True)
     
     t_col1, t_col2 = st.columns(2)
     with t_col1:
@@ -358,14 +319,8 @@ with col_left:
     transport_val = "Airways" if "Airways" in transport_mode else ("Waterways" if "Waterways" in transport_mode else "Roadways")
     
     st.markdown('</div>', unsafe_allow_html=True)
-    
-    predict_clicked = st.button("PREDICT SHIPMENT PRICE ⚡", use_container_width=True)
 
-# ==========================================
-# RIGHT PANEL: PREDICTION DASHBOARD
-# ==========================================
 with col_right:
-    # Prediction Calculation Logic
     base_shipping_rate = 25.0 + (distance_km * 0.04)
     if "Airways" in transport_mode:
         mode_multiplier = 2.2
@@ -378,7 +333,6 @@ with col_right:
     fragile_fee = 85.0 if is_fragile == "Yes" else 0.0
     remote_fee = 60.0 if is_remote == "Yes" else 0.0
 
-    # Model Inference with fallback
     predicted_cost = None
     if trained_model is not None:
         try:
@@ -411,7 +365,6 @@ with col_right:
     if predicted_cost is None:
         predicted_cost = (weight * 1.85 * mode_multiplier * urgency_multiplier) + base_shipping_rate + (cargo_value * 0.02) + fragile_fee + remote_fee
 
-    # Cost Breakdown Calculation
     base_freight = round(predicted_cost * 0.62, 2)
     fuel_surcharge = round(predicted_cost * 0.14, 2)
     insurance_fee = round(max(35.0, cargo_value * 0.025), 2)
@@ -421,14 +374,13 @@ with col_right:
         urgency_fee = round(predicted_cost * 0.10, 2)
         predicted_cost = base_freight + fuel_surcharge + insurance_fee + handling_fees + urgency_fee
 
-    # Metrics Header Row
     m_row1, m_row2 = st.columns(2)
     with m_row1:
         st.markdown(f"""
         <div class="metric-card" style="border-left: 4px solid #388bfd;">
-            <div class="metric-title">ESTIMATED SHIPMENT COST</div>
+            <div class="metric-title">Estimated Shipment Cost</div>
             <div class="metric-value">${predicted_cost:,.2f} <span style="font-size: 16px; color: #8b949e; font-weight: 500;">USD</span></div>
-            <div class="metric-sub">▲ +2.3% vs Market Average • Dynamic Route Tariff</div>
+            <div class="metric-sub">Dynamic route tariff calculation</div>
         </div>
         """, unsafe_allow_html=True)
         
@@ -436,20 +388,19 @@ with col_right:
         confidence = 96.8 if trained_model is not None else 95.4
         st.markdown(f"""
         <div class="metric-card" style="border-left: 4px solid #3fb950;">
-            <div class="metric-title">CONFIDENCE SCORE</div>
+            <div class="metric-title">Confidence Score</div>
             <div class="metric-value" style="color: #3fb950;">{confidence}%</div>
-            <div class="metric-sub" style="color: #8b949e;">High Confidence • Trained on 6,500+ Shipments</div>
+            <div class="metric-sub" style="color: #8b949e;">High Reliability Index</div>
         </div>
         """, unsafe_allow_html=True)
         
     st.markdown("<div style='margin-bottom: 16px;'></div>", unsafe_allow_html=True)
     
-    # Breakdown Chart & Timeline Row
     b_col1, b_col2 = st.columns([1.1, 1])
     
     with b_col1:
         st.markdown('<div class="card-panel">', unsafe_allow_html=True)
-        st.markdown('<div class="card-title">📊 Price Breakdown</div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-title">Price Breakdown</div>', unsafe_allow_html=True)
         
         categories = ['Base Freight', 'Fuel Surcharge', 'Insurance', 'Fees', 'Urgency Fee']
         values = [base_freight, fuel_surcharge, insurance_fee, handling_fees, urgency_fee]
@@ -463,7 +414,7 @@ with col_right:
                 textposition='auto',
                 marker=dict(
                     color=colors,
-                    line=dict(color='rgba(255,255,255,0.1)', width=1)
+                    line=dict(color='rgba(255,255,255,0.08)', width=1)
                 )
             )
         ])
@@ -481,70 +432,66 @@ with col_right:
         
     with b_col2:
         st.markdown('<div class="card-panel">', unsafe_allow_html=True)
-        st.markdown('<div class="card-title">⏱️ Predicted Delivery Timeline</div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-title">Delivery Timeline</div>', unsafe_allow_html=True)
         
         eta_days = "1-2 Days" if "Urgent" in urgency else ("3-5 Days" if "Standard" in urgency else "5-10 Days")
-        transit_label = "Air Cargo (Flight)" if "Airways" in transport_mode else ("Ocean Liner" if "Waterways" in transport_mode else "Express Road")
+        transit_label = "Air Transit" if "Airways" in transport_mode else ("Ocean Transit" if "Waterways" in transport_mode else "Road Transit")
         
         st.markdown(f"""
         <div style="padding: 10px 0;">
-            <div style="font-size: 13px; color: #8b949e; margin-bottom: 12px;">Estimated Transit Window: <strong style="color: #f0f6fc;">{eta_days}</strong></div>
+            <div style="font-size: 13px; color: #8b949e; margin-bottom: 12px;">Transit Window: <strong style="color: #f0f6fc;">{eta_days}</strong></div>
             <div class="timeline-container">
                 <div class="timeline-line"></div>
                 <div class="timeline-step">
-                    <div class="step-icon">🏢</div>
+                    <div class="step-icon">A</div>
                     <div class="step-title">Pickup</div>
                     <div class="step-desc">{HUBS[origin]["code"]}</div>
                 </div>
                 <div class="timeline-step">
-                    <div class="step-icon" style="border-color: #3fb950;">✈️</div>
+                    <div class="step-icon" style="border-color: #3fb950; color: #3fb950;">B</div>
                     <div class="step-title">{transit_label}</div>
                     <div class="step-desc">{distance_km:,.0f} km</div>
                 </div>
                 <div class="timeline-step">
-                    <div class="step-icon" style="border-color: #f0883e;">📍</div>
+                    <div class="step-icon" style="border-color: #f0883e; color: #f0883e;">C</div>
                     <div class="step-title">Delivery</div>
                     <div class="step-desc">{HUBS[dest]["code"]}</div>
                 </div>
             </div>
             <div style="margin-top: 14px; padding: 8px 12px; background: #21262d; border-radius: 6px; font-size: 12px; color: #8b949e; text-align: center;">
-                Customs Clearance: <span style="color: #3fb950; font-weight: 600;">Standard Automated Protocol</span>
+                Customs Clearance: <span style="color: #3fb950; font-weight: 600;">Automated Process</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
         
-    # Transit Route Interactive Map
     st.markdown('<div class="card-panel">', unsafe_allow_html=True)
-    st.markdown(f'<div class="card-title">🗺️ Transit Route Map — {origin} ➔ {dest} ({distance_km:,.0f} km)</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="card-title">Transit Route Map — {origin} to {dest} ({distance_km:,.0f} km)</div>', unsafe_allow_html=True)
     
     orig_lat, orig_lon = HUBS[origin]["lat"], HUBS[origin]["lon"]
     dest_lat, dest_lon = HUBS[dest]["lat"], HUBS[dest]["lon"]
     
-    # Generate flight curve arc points
     num_pts = 50
     lats = [orig_lat + (dest_lat - orig_lat) * i / num_pts + 8 * math.sin(math.pi * i / num_pts) for i in range(num_pts + 1)]
     lons = [orig_lon + (dest_lon - orig_lon) * i / num_pts for i in range(num_pts + 1)]
     
     fig_map = go.Figure()
     
-    # Flight path arc line
     fig_map.add_trace(go.Scattergeo(
         lon=lons,
         lat=lats,
         mode='lines',
-        line=dict(width=3, color='#58a6ff'),
+        line=dict(width=2.5, color='#58a6ff'),
         hoverinfo='none'
     ))
     
-    # Hub Markers
     fig_map.add_trace(go.Scattergeo(
         lon=[orig_lon, dest_lon],
         lat=[orig_lat, dest_lat],
         mode='markers+text',
         text=[HUBS[origin]["code"], HUBS[dest]["code"]],
         textposition="top center",
-        marker=dict(size=[12, 12], color=['#1f6feb', '#f0883e'], symbol='circle', line=dict(color='#ffffff', width=2)),
+        marker=dict(size=[10, 10], color=['#1f6feb', '#f0883e'], symbol='circle', line=dict(color='#ffffff', width=2)),
         hoverinfo='text'
     ))
     
